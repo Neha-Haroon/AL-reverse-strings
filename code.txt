@@ -1,0 +1,327 @@
+dosseg
+.model small
+.stack 100h
+.data		;VARIABLE------------------------------
+ 
+intro db ' ----------------------- REVERSE OF STRINGS -----------------------:$'
+ 
+info_of_palindromes db ' THESE WORDS ARE PALINDROMES, STR = REVERSE(STR) :$'
+ 
+info_normal_words db ' THESE WORDS ARE NOT PALINDROMES, STR != REVERSE(STR) :$'
+ 
+palindrome_words db ' redivider deified civic radar level rotor kayak reviver racecar madam refer $'
+ 
+normal_words db 'ASSEMBLY LANUAGE$'
+ 
+before db ' ----------------------- BEFORE REVERSE:$' 
+ 
+after db ' ----------------------- AFTER REVERSE:$'
+ 
+.code		;CODE----------------------------------
+main proc	
+
+mov ax,@data		;CONNECT .DATA AND .CODE
+mov ds,ax	
+ 
+mov dx, offset intro	;PRINT INTRO
+ 
+; set counter to 1
+ 
+mov ah,9	;print str
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h  
+ 
+ 
+mov dx, offset info_of_palindromes	;send  info_of_palindromes to dx
+ 
+; set counter to 1
+ 
+; print info_of_palindromes
+ 
+mov ah,9	;print str
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+mov dx, offset before 			;send  before to dx
+ 
+; set counter to 1
+ 
+; print before 
+ 
+ 
+mov ah,9	;print str
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h
+ 
+mov dx, offset palindrome_words 	;send  palindrome_words to dx
+ 
+; set counter to 1
+ 
+; print before 
+ 
+mov ah,9	;print str
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+mov dx, offset after 		;send  before to dx
+ 
+; set counter to 1
+ 
+; print before 
+ 
+ 
+mov ah,9	;print str
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h
+ 
+mov si, offset palindrome_words 
+ 
+mov cx,76
+ 
+pushl:
+mov bx,[si]
+push bx
+inc si
+loop pushl
+ 
+mov cx,76
+popl:
+pop dx
+mov ah,2
+int 21h
+loop popl
+ 
+ 
+ 
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+ 
+mov dx, offset info_normal_words	;send  info_normal_words to dx
+ 
+; set counter to 1
+ 
+; print info_normal_words
+ 
+ 
+mov ah,9	;print str
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+mov dx, offset before 			;send  before to dx
+ 
+; set counter to 1
+ 
+; print before 
+ 
+ 
+mov ah,9	;print str
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h
+ 
+mov dx, offset normal_words 	;send  normal_words to dx
+ 
+; set counter to 1
+ 
+; print before 
+ 
+ 
+ 
+mov ah,9	;print str
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+mov dx, offset after 		;send  after to dx
+ 
+; set counter to 1
+ 
+; print before 
+ 
+mov ah,9	;print str
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h
+ 
+mov si, offset normal_words 
+ 
+mov cx,17
+ 
+pushnl:
+mov bx,[si]
+push bx
+inc si
+loop pushnl
+ 
+mov cx,17
+popnl:
+pop dx
+mov ah,2
+int 21h
+loop popnl
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+mov ah,4ch	;end
+int 21h
+ 
+printstr:	;DEFINE STR PRINT LOOP
+mov ah,9	;print str
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h
+ 
+mov dx,10	;new line feed
+mov ah,2
+int 21h
+ 
+mov dx,13	;carriage return
+mov ah,2
+int 21h 
+ 
+mov ah,4ch	;end
+int 21h
+ 
+main endp
+end main
